@@ -64,4 +64,12 @@ class Mage(Hero):
     def take_damage(self,damage):
         self.health -= damage - (damage * self._magic_shield)
 
-
+hero = Warrior("ON","Artur",100)
+mage = Mage("Viktor", 100, 0.5)
+hero.attack(mage)
+print(mage.health)
+mage.attack(hero)
+print(hero.health)
+hero.desk_setter("OFF")
+hero.attack(mage)
+print(mage.health)
