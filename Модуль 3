@@ -1,0 +1,67 @@
+class Hero:
+    def __init__(self, name, health):
+        self._name = name
+        self._health = health
+        self._still_alive = True
+
+
+    def take_damage(self,damage):
+        self.health -= damage
+
+    @property
+    def health(self):
+        return self._health
+
+    @health.setter
+    def health(self,new_health):
+        self._health = new_health
+        if new_health <= 0:
+            self._still_alive = False
+        else:
+            self._still_alive = True
+            print("Герой жив")
+
+class Warrior(Hero):
+    def __init__(self,stance,name,health):
+        super().__init__(name, health)
+        if not isinstance(stance,str) or stance not in("OFF", "ON"):
+            print("Стойка должна быть 'OFF' (атакующая) или 'ON' (защитная)")
+        else:
+            self._stance = stance
+        self.yron = 20
+
+    def desk_setter(self,stance):
+        self._stance = stance
+        if self._stance == "ON":
+            pass
+        elif self._stance == "OFF":
+            self.yron += self.yron * 0.15
+        else:
+            print("Нужно выбрать ON(Защитная стойка) или OFF(Атакующая стойка)")
+
+
+    def attack(self,hero):
+        hero.take_damage(self.yron)
+
+    def take_damage(self,damage):
+        if self._stance == "ON":
+            self.health -= damage * 0.8
+        else:
+            self.health = self.health - damage
+
+
+class Mage(Hero):
+    def __init__(self,name, health, magic_shield):
+        super().__init__(name,health)
+        if not isinstance(magic_shield,float) or not (0.0 < magic_shield <= 1.0):
+            print("Число должно быть Float от 0 до 1")
+        else:
+            self._magic_shield = magic_shield
+        self.yron = 15
+
+    def attack(self, hero):
+        hero.take_damage(self.yron)
+    def take_damage(self,damage):
+        self.health -= damage - (damage * self._magic_shield)
+
+
