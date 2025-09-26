@@ -1,0 +1,22 @@
+market = {"Карта сокровищ":150,"Компас магнитный":75,"Подзорная труба":120,"Сундук моряка":250}
+tovar = input("Введите название товара")
+kol_vo = int(input("Введите кол-во товара"))
+tovar_result = []
+
+while tovar in market:
+    result = kol_vo * market[tovar]
+    tovar_result.append(tovar)
+    if result > 400:
+        result = result - (result * 0.15)
+        if kol_vo > 3:
+            tovar_result.append("Крюк-сувенир")
+            print(f"Получен бесплатный Крюк. Товары:{tovar_result}, Стоимость товаров:{result}")
+        elif kol_vo <= 3:
+            print(f"Товар:{tovar_result}, Стоимость {result}")
+    elif result <= 400:
+        if kol_vo > 3:
+            tovar_result.append("Крюк-сувенир")
+            print(f"Получен бесплатный Крюк. Товары:{tovar_result}, Стоимость товаров:{result}")
+        elif kol_vo <= 3:
+            print(f"Товар: {tovar_result} Стоимость: {result}")
+    break
